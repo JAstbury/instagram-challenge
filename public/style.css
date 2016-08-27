@@ -1,0 +1,22 @@
+body {
+  background-color: #efeff5;
+  text-align: center;
+}
+
+header {
+  background-color: white;
+  border-bottom: solid #c2c2d6;
+  text-align: left;
+  height: 100px;
+  padding: 25px;
+}
+
+header img {
+  height: 40px;
+  width: auto;
+}
+
+.verticalLine {
+    border-left: solid #c2c2d6;
+    height: 40px;
+}

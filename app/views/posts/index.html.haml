@@ -1,7 +1,7 @@
 - if @posts.any?
   - @posts.each do |post|
-    %h2= post.caption
-    = image_tag post.image.url(:thumb)
+    = image_tag post.image.url(:medium)
+    %h4= post.caption
 - else
   No posts yet
 
