@@ -30,6 +30,17 @@ feature 'posts' do
     expect(page).to have_content 'burgers'
     expect(current_path).to eq '/posts'
   end
+
+  context 'an invalid post' do
+    it 'does not let post with a caption that is too short' do
+      visit '/posts'
+      click_link 'Add a post'
+      fill_in 'Caption', with: 'bu'
+      click_button 'Create Post'
+      expect(page).not_to have_css 'h4', text: 'kf'
+      expect(page).to have_content 'error'
+    end
+  end
   end
 
   context 'editing posts' do
