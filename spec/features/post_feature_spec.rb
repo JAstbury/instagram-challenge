@@ -36,14 +36,27 @@ feature 'posts' do
 
   before { Post.create caption: 'Hellooo Im a test post' }
 
-  scenario 'let a user edit their post' do
+  scenario 'user can edit their post' do
    visit '/posts'
    click_link 'Edit'
    fill_in 'Caption', with: 'Changing the caption'
    click_button 'Update Post'
    expect(page).to have_content 'Changing the caption'
-   expect(page).to have_content 'Hellooo Im a test post'
+   expect(page).not_to have_content 'Hellooo Im a test post'
    expect(current_path).to eq '/posts'
+  end
+
+end
+
+context 'deleting posts' do
+
+  before { Post.create caption: 'Delete me please' }
+
+  scenario 'user can delete their post' do
+    visit '/posts'
+    click_link 'Delete'
+    expect(page).not_to have_content 'Delete me please'
+    expect(page).to have_content 'Post deleted!'
   end
 
 end
