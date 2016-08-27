@@ -25,4 +25,11 @@ header img {
   border: solid #c2c2d6;
   width: 300px;
   margin: 20px auto 20px auto;
+  background-color: white;
+  text-align: left;
+}
+
+#usericon img {
+  height: 20px;
+  margin: 10px;
 }

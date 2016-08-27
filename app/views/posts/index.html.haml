@@ -1,11 +1,15 @@
 - if @posts.any?
   - @posts.each do |post|
     %div#post
-      = post.email
+      %span#usericon
+        %img(src="/user-icon.png")
+      = post.name
       = image_tag post.image.url(:medium)
       %h4= post.caption
       - post.comments.each do |comment|
-        %li=comment.email + " : " + comment.thoughts
+        %p
+          %b= comment.name
+          = comment.thoughts
       - if current_user
         = link_to "Comment", new_post_comment_path(post)
         - if current_user.id === post.user_id
