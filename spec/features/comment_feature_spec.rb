@@ -2,7 +2,10 @@ require 'rails_helper'
 
 feature 'comments' do
 
-  before { Post.create(caption: 'burger') }
+  before do
+    post = Post.new(caption: 'burger')
+    post.save(:validate => false)
+  end
 
   scenario 'users can leave comments on a post' do
      visit '/posts'

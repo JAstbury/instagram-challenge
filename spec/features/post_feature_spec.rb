@@ -11,7 +11,8 @@ feature 'posts' do
 
   context 'posts have been added' do
   before do
-    Post.create(caption: 'burger')
+    post = Post.new(caption: 'burger')
+    post.save(:validate => false)
   end
 
   scenario 'display posts' do
@@ -26,6 +27,7 @@ feature 'posts' do
     visit '/posts'
     click_link 'Add a post'
     fill_in 'Caption', with: 'burgers'
+    page.attach_file("post_image", Rails.root + 'public/images/burger.jpg')
     click_button 'Create Post'
     expect(page).to have_content 'burgers'
     expect(current_path).to eq '/posts'
@@ -45,23 +47,29 @@ feature 'posts' do
 
   context 'editing posts' do
 
-  before { Post.create caption: 'Hellooo Im a test post' }
+    before do
+      Post.create(caption: 'Hellooo Im a test post',
+      image: File.new(Rails.root + 'public/images/burger.jpg'))
+    end
 
-  scenario 'user can edit their post' do
-   visit '/posts'
-   click_link 'Edit'
-   fill_in 'Caption', with: 'Changing the caption'
-   click_button 'Update Post'
-   expect(page).to have_content 'Changing the caption'
-   expect(page).not_to have_content 'Hellooo Im a test post'
-   expect(current_path).to eq '/posts'
+    scenario 'user can edit their post' do
+     visit '/posts'
+     click_link 'Edit'
+     fill_in 'Caption', with: 'Changing the caption'
+     click_button 'Update Post'
+     expect(page).to have_content 'Changing the caption'
+     expect(page).not_to have_content 'Hellooo Im a test post'
+     expect(current_path).to eq '/posts'
+    end
+
   end
-
-end
 
 context 'deleting posts' do
 
-  before { Post.create caption: 'Delete me please' }
+  before do
+    post = Post.new(caption: 'Delete me please')
+    post.save(:validate => false)
+  end
 
   scenario 'user can delete their post' do
     visit '/posts'
