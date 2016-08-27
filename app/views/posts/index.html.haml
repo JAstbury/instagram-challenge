@@ -2,6 +2,9 @@
   - @posts.each do |post|
     = image_tag post.image.url(:medium)
     %h4= post.caption
+    - post.comments.each do |comment|
+      %li=comment.thoughts
+    = link_to "Comment", new_post_comment_path(post)
     = link_to "Edit Caption", edit_post_path(post)
     = link_to "Delete", post_path(post), method: :delete
 - else
