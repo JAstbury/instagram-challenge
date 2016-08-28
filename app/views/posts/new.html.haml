@@ -1,3 +1,7 @@
+%head
+  %link{:rel => :stylesheet, :type => :"text/css", :integrity => :"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", :crossorigin=> :"anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"}
+  %link{:rel => :stylesheet, :type => :"text/css", :href => "style.css"}
+
 - if @post.errors.any?
   %section#errors
     %h2
@@ -6,10 +10,11 @@
     %ul
       - @post.errors.full_messages.each do |message|
         %li= message
-
-
-= form_for @post, html: {multipart: true} do |f|
-  = f.file_field :image
-  = f.label :caption
-  = f.text_field :caption
-  = f.submit
+%br
+%div#form
+  = form_for @post, html: {multipart: true} do |f|
+    = f.file_field :image
+    %br
+    = f.label :caption
+    = f.text_field :caption
+    = f.submit

@@ -4,7 +4,8 @@
       %span#usericon
         %img(src="/user-icon.png")
       = post.name
-      = image_tag post.image.url(:medium)
+      %div#snap
+        = image_tag post.image.url(:medium)
       %span.likes_count= post.likes.count
       = 'Like'.pluralize post.likes.count
       %h4= post.caption
