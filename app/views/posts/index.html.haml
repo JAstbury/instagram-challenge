@@ -5,6 +5,8 @@
         %img(src="/user-icon.png")
       = post.name
       = image_tag post.image.url(:medium)
+      %span.likes_count= post.likes.count
+      = 'Like'.pluralize post.likes.count
       %h4= post.caption
       - post.comments.each do |comment|
         %p
@@ -12,6 +14,7 @@
           = comment.thoughts
       - if current_user
         = link_to "Comment", new_post_comment_path(post)
+        = link_to "Like", post_likes_path(post), class: 'likes-link'
         - if current_user.id === post.user_id
           = link_to "Edit Caption", edit_post_path(post)
           = link_to "Delete", post_path(post), method: :delete
