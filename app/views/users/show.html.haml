@@ -1,12 +1,15 @@
+%head
+  %link{:rel => :stylesheet, :type => :"text/css", :integrity => :"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", :crossorigin=> :"anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"}
+  %link{:rel => :stylesheet, :type => :"text/css", :href => "/style.css"}
 %br
-%a(href='/posts/new') Add a post
+%h1= "Posts by " + @user.name + "..."
 %br
-- if @posts.any?
-  - @posts.each do |post|
+- if @user.posts.any?
+  - @user.posts.each do |post|
     %div#post
       %span#usericon
         %img(src="/user-icon.png")
-      = link_to post.name, user_path(post.user)
+      = post.name
       %div#snap
         = image_tag post.image.url(:medium)
       %span.likes_count= post.likes.count
@@ -14,7 +17,7 @@
       %h4= post.caption
       - post.comments.each do |comment|
         %p
-          %b= link_to comment.name, user_path(comment.user)
+          %b= comment.name
           = comment.thoughts
       - if current_user
         = link_to "Comment", new_post_comment_path(post)
@@ -23,4 +26,4 @@
           = link_to "Edit Caption", edit_post_path(post)
           = link_to "Delete", post_path(post), method: :delete
 - else
-  No posts yet
+  No posts yet!

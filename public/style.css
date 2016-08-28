@@ -16,11 +16,6 @@ header img {
   width: auto;
 }
 
-.verticalLine {
-    border-left: solid #c2c2d6;
-    height: 40px;
-}
-
 #post {
   border: solid #c2c2d6;
   width: 406px;
